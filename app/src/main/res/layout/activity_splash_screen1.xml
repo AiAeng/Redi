@@ -47,7 +47,7 @@
         android:layout_marginBottom="70dp">
 
         <ImageButton
-            android:id="@+id/button3"
+            android:id="@+id/skip_splashscreen1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/skip"
@@ -57,7 +57,7 @@
             />
 
         <ImageButton
-            android:id="@+id/button4"
+            android:id="@+id/next_splashscreen1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/next"
