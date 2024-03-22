@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.session1_splash_screen)
 
         // Это используется, чтобы скрыть строку состояния и сделать
         // заставку полноэкранной.

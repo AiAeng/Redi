@@ -9,7 +9,7 @@ import android.widget.TextView
 class SplashScreen3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen3)
+        setContentView(R.layout.session1_splash_screen3)
 
         val signup: ImageButton = findViewById(R.id.signUp)
         val signin: TextView = findViewById(R.id.SignIn)

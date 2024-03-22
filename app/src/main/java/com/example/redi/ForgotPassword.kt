@@ -9,16 +9,14 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 
-class WelcomeBack : AppCompatActivity() {
+class ForgotPassword : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.session2_welcome_back)
+        setContentView(R.layout.session2_forgot_password)
 
-        val signUp: TextView = findViewById(R.id.SignUp)
+        val signIn: TextView = findViewById(R.id.SignIn)
         val emailAddressInput = findViewById<EditText>(R.id.EmailAddress_input)
-        val passwordInput = findViewById<EditText>(R.id.Password_input)
-        val LogInButton = findViewById<ImageButton>(R.id.logIn)
-        val ForgotPass: TextView = findViewById(R.id.Forgot)
+        val SendOtp = findViewById<ImageButton>(R.id.SendOTP)
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -27,31 +25,22 @@ class WelcomeBack : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 val emailAddress = emailAddressInput.text.toString()
-                val password = passwordInput.text.toString()
 
 
-                if (emailAddress.isNotEmpty() &&
-                    password.isNotEmpty()
-                ) {
-                    LogInButton.setImageResource(R.drawable.log_in)
+                if (emailAddress.isNotEmpty()) {
+                    SendOtp.setImageResource(R.drawable.sendotp)
                 } else {
-                    LogInButton.setImageResource(R.drawable.log_in_before)
+                    SendOtp.setImageResource(R.drawable.sendotpbefore)
                 }
 
             }
         }
 
         emailAddressInput.addTextChangedListener(textWatcher)
-        passwordInput.addTextChangedListener(textWatcher)
 
-        signUp.setOnClickListener{
-            val intent2 = Intent(this, CreateAnAccount::class.java)
+        signIn.setOnClickListener{
+            val intent2 = Intent(this, WelcomeBack::class.java)
             startActivity(intent2)
-        }
-
-        ForgotPass.setOnClickListener {
-            val intent = Intent(this, ForgotPassword::class.java)
-            startActivity(intent)
         }
     }
 }
