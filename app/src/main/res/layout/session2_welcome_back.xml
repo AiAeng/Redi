@@ -168,7 +168,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="45dp"
             android:fontFamily="@font/roboto"
-            android:text="or sign in using?"
+            android:text="or log in using?"
             android:textColor="#A7A7A7"
             android:textSize="12dp" />
 

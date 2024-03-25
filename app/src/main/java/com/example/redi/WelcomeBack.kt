@@ -20,6 +20,8 @@ class WelcomeBack : AppCompatActivity() {
         val LogInButton = findViewById<ImageButton>(R.id.logIn)
         val ForgotPass: TextView = findViewById(R.id.Forgot)
 
+        LogInButton.isEnabled = false
+
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -34,8 +36,11 @@ class WelcomeBack : AppCompatActivity() {
                     password.isNotEmpty()
                 ) {
                     LogInButton.setImageResource(R.drawable.log_in)
+                    LogInButton.isEnabled = true
+
                 } else {
                     LogInButton.setImageResource(R.drawable.log_in_before)
+
                 }
 
             }
@@ -53,5 +58,14 @@ class WelcomeBack : AppCompatActivity() {
             val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)
         }
+
+        LogInButton.setOnClickListener {
+            if (LogInButton.isEnabled){
+
+                val intent = Intent(this@WelcomeBack, Home::class.java)
+                startActivity(intent)
+            }
+        }
+
     }
 }

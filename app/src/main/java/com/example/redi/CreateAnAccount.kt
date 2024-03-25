@@ -28,12 +28,16 @@ class CreateAnAccount : AppCompatActivity() {
         val signUpButton = findViewById<ImageButton>(R.id.signUp)
         val checkBox = findViewById<CheckBox>(R.id.checkBox)
         val signIn: TextView = findViewById(R.id.SignIn)
+        signUpButton.isEnabled = false
 
         val fullText = checkBox.text.toString()
         val spannableString = SpannableString(fullText)
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+                )
                 startActivity(intent)
             }
         }
@@ -41,8 +45,19 @@ class CreateAnAccount : AppCompatActivity() {
         val startIndex = fullText.indexOf("Terms and сonditions and private policy")
         val endIndex = startIndex + "Terms and сonditions and private policy".length
 
-        spannableString.setSpan(clickableSpan, startIndex, endIndex, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(android.text.style.ForegroundColorSpan(android.graphics.Color.parseColor("#EBBC2E")), startIndex, endIndex, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            clickableSpan,
+            startIndex,
+            endIndex,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableString.setSpan(
+            android.text.style.ForegroundColorSpan(
+                android.graphics.Color.parseColor(
+                    "#EBBC2E"
+                )
+            ), startIndex, endIndex, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
         checkBox.text = spannableString
         checkBox.movementMethod = LinkMovementMethod.getInstance()
@@ -62,16 +77,20 @@ class CreateAnAccount : AppCompatActivity() {
 
                 val isChecked = checkBox.isChecked
 
+
                 if (fullName.isNotEmpty() &&
                     phoneNumber.isNotEmpty() &&
                     emailAddress.isNotEmpty() &&
                     password.isNotEmpty() &&
                     passwordConf.isNotEmpty() &&
                     password == passwordConf &&
-                    isChecked) {
+                    isChecked
+                ) {
                     signUpButton.setImageResource(R.drawable.signup)
+                    signUpButton.isEnabled = true
                 } else {
                     signUpButton.setImageResource(R.drawable.signup_before)
+
                 }
             }
         }
@@ -85,9 +104,16 @@ class CreateAnAccount : AppCompatActivity() {
             textWatcher.afterTextChanged(null) // Повторная проверка при изменении состояния CheckBox
         }
 
-        signIn.setOnClickListener{
+        signIn.setOnClickListener {
             val intent2 = Intent(this, WelcomeBack::class.java)
             startActivity(intent2)
+        }
+
+        signUpButton.setOnClickListener {
+            if (signUpButton.isEnabled) {
+                val intent = Intent(this@CreateAnAccount, Home::class.java)
+                startActivity(intent)
+            }
         }
     }
 }

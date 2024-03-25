@@ -17,6 +17,7 @@ class ForgotPassword : AppCompatActivity() {
         val signIn: TextView = findViewById(R.id.SignIn)
         val emailAddressInput = findViewById<EditText>(R.id.EmailAddress_input)
         val SendOtp = findViewById<ImageButton>(R.id.SendOTP)
+        SendOtp.isEnabled = false
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -29,8 +30,11 @@ class ForgotPassword : AppCompatActivity() {
 
                 if (emailAddress.isNotEmpty()) {
                     SendOtp.setImageResource(R.drawable.sendotp)
+                    SendOtp.isEnabled = true
+
                 } else {
                     SendOtp.setImageResource(R.drawable.sendotpbefore)
+
                 }
 
             }
@@ -41,6 +45,12 @@ class ForgotPassword : AppCompatActivity() {
         signIn.setOnClickListener{
             val intent2 = Intent(this, WelcomeBack::class.java)
             startActivity(intent2)
+        }
+        SendOtp.setOnClickListener {
+            if (SendOtp.isEnabled){
+                val intent = Intent(this@ForgotPassword, OTPverification::class.java)
+                startActivity(intent)
+            }
         }
     }
 }
