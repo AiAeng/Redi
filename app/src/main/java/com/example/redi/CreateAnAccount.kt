@@ -14,12 +14,16 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.gotrue.Auth
+import io.github.jan.supabase.postgrest.Postgrest
 
 class CreateAnAccount : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.session2_create_an_account)
 
+        //находим едиттексты на лэйаутах
         val fullNameInput = findViewById<EditText>(R.id.FullName_input)
         val phoneNumberInput = findViewById<EditText>(R.id.PhoneNumber_input)
         val emailAddressInput = findViewById<EditText>(R.id.EmailAddress_input)
@@ -29,6 +33,15 @@ class CreateAnAccount : AppCompatActivity() {
         val checkBox = findViewById<CheckBox>(R.id.checkBox)
         val signIn: TextView = findViewById(R.id.SignIn)
         signUpButton.isEnabled = false
+
+        val supabase = createSupabaseClient(
+            supabaseUrl = "https://xfxhvlnxspgsjuhkcxog.supabase.co",
+            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhmeGh2bG54c3Bnc2p1aGtjeG9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTExMTMyNzEsImV4cCI6MjAyNjY4OTI3MX0.c6JJx3S1Ry4udbioWKzb-cM-4PIlrg9y-0e9w-CPsXQ"
+        ) {
+            install(Auth)
+            install(Postgrest)
+            //install other modules
+        }
 
         val fullText = checkBox.text.toString()
         val spannableString = SpannableString(fullText)
@@ -62,7 +75,7 @@ class CreateAnAccount : AppCompatActivity() {
         checkBox.text = spannableString
         checkBox.movementMethod = LinkMovementMethod.getInstance()
 
-
+        //считывание изменений в этих эдитеекстах
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -109,6 +122,7 @@ class CreateAnAccount : AppCompatActivity() {
             startActivity(intent2)
         }
 
+        //и по этой кнопке должна происходить регистрация, где передаются номер тел, почта, имя, пароль
         signUpButton.setOnClickListener {
             if (signUpButton.isEnabled) {
                 val intent = Intent(this@CreateAnAccount, Home::class.java)
